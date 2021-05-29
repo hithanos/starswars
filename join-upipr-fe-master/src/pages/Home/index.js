@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useRef } from "react";
 import logo from "./star-wars-logo.png";
 import { MdSearch } from "react-icons/md";
 import { Person } from "../Person/Person";
@@ -11,7 +11,8 @@ function HomePage() {
   const [loading, setLoading] = useState(false);
   const [dropDownActive, setdropDownActive] = useState(true);
   const [suggestion, setSuggestion] = useState([]);
-
+  const [cursor, setCursor] = React.useState(-1);
+  const serachContainer = useRef(null);
   //calling the get method with axios
   function characterFinder(value) {
     console.log("API");
@@ -58,18 +59,31 @@ function HomePage() {
       setdropDownActive(true);
     }
   };
-  console.log(suggestion);
+  const KeyBoardNavigation = (e) => {
+    if (e.key === "ArrowDown") {
+      if (!dropDownActive) {
+        setCursor((c) => (c < suggestion.length - 1 ? c + 1 : c));
+      }
+    }
+    if (e.key === "ArrowUp") {
+      setCursor((c) => (c >= 0 ? c - 1 : 0));
+    }
+    if (e.key === "Escape") {
+      setdropDownActive(true);
+    }
+  };
   return (
     <div>
       <div className="logo">
         <img src={logo} alt="Star Wars Logo" />
       </div>
-      <div className="div-input">
+      <div className="div-input" ref={serachContainer}>
         <input
           className="search-input"
           placeholder="Search by name"
           value={query}
           onChange={handleChange}
+          onKeyDown={(e) => KeyBoardNavigation(e)}
         />
         {loading ? (
           <div className="loader">jj</div>
@@ -86,6 +100,10 @@ function HomePage() {
               gender={char.gender}
               year={char.birth_year}
               key={index}
+              onSelected={() => {
+                setQuery(char.name);
+              }}
+              hightlight={cursor == index ? true : false}
             />
           ))}
         </div>
