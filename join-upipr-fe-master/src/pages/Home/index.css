@@ -1,21 +1,61 @@
+.div-input {
+  width: 40vw;
+  background: #2d2f30;
+  display: flex;
+  align-items: center;
+  border-radius: 25px 25px;
+}
 .search-input {
-    width: 400px;
-    padding: 16px 24px;
-    border-radius: 25px;
-    border: 0;
-    outline: 0;
-
-    font-size: 16px;
-
-    background: #2d2f30;
-    color: #f2f2f2;
+  padding: 16px 20px;
+  border: 0;
+  outline: 0;
+  font-size: 20px;
+  background: #2d2f30;
+  color: #f2f2f2;
+  border-radius: 25px 25px;
+  flex: 1;
+}
+.search-icon {
+  background-color: yellow;
+  border-radius: 50%;
+  border-radius: 25px 25px;
+  margin-right: 8px;
+  font-size: 45px;
 }
 
 .logo {
-    text-align: center;
-    margin-bottom: 35px;
+  text-align: center;
+  margin-bottom: 35px;
 }
 
 .logo img {
-    width: 200px;
+  width: 200px;
+}
+
+/* If screen size is 600px wide, or less, set the input size and searchicon */
+@media screen and (max-width: 800px) {
+  .div-input {
+    width: 50vw;
+  }
+  .search-input {
+    border: 0;
+    outline: 0;
+    font-size: 15px;
+    background: #2d2f30;
+    color: #f2f2f2;
+    border-radius: 25px 25px;
+    flex: 1;
+  }
+  .search-icon {
+    background-color: yellow;
+    border-radius: 50%;
+    border-radius: 25px 25px;
+    margin-right: 8px;
+    font-size: 35px;
+  }
+}
+@media screen and (max-width: 400px) {
+  .div-input {
+    width: 80vw;
+  }
 }
