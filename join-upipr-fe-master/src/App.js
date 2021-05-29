@@ -14,11 +14,9 @@ function App() {
           <Route path="/" exact>
             <HomePage />
           </Route>
-
           <Route path="/person/:id">
             <Person />
           </Route>
-
           <Route>
             <NotFound />
           </Route>

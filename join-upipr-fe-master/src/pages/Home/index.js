@@ -1,31 +1,38 @@
 import React, { useState, useCallback, useRef } from "react";
 import logo from "./star-wars-logo.png";
 import { MdSearch } from "react-icons/md";
-import { Person } from "../Person/Person";
+import { PersonSuggest } from "../PersonSuggest/PersonSuggest";
 import axios from "axios";
-
 import "./index.css";
+import { useHistory } from "react-router-dom";
 
 function HomePage() {
-  const [query, setQuery] = useState(" ");
+  const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
-  const [dropDownActive, setdropDownActive] = useState(true);
+  const [Hide, setHide] = useState(true);
   const [suggestion, setSuggestion] = useState([]);
   const [cursor, setCursor] = React.useState(-1);
   const serachContainer = useRef(null);
+  const history = useHistory();
   //calling the get method with axios
   function characterFinder(value) {
-    console.log("API");
     setLoading(true);
-    return axios
-      .get(`https://swapi.dev/api/people/?search=${value}`)
-      .then((res) => {
-        setSuggestion(res.data.results);
-      })
-      .catch((err) => console.log(err), setLoading(false))
-      .finally(() => {
-        setLoading(false);
-      });
+    if (value) {
+      axios
+        .get(`https://swapi.dev/api/people/?search=${value}`)
+        .then((res) => {
+          setSuggestion(res.data.results);
+          setHide(false);
+        })
+        .catch((err) => {
+          setLoading(false);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    } else {
+      setLoading(false);
+    }
   }
   //using the function debouncing for making the api hit as less as possible but with smooth userInterface
   const debouncing = function (fn, delay) {
@@ -51,17 +58,18 @@ function HomePage() {
     const { value } = e.target;
     setQuery(value);
     if (value != "" || query != "") {
-      setdropDownActive(false);
+      setHide(false);
       debounceData(value);
     }
-    if (value == "" || query == "") {
+    if (value === "" || query === "" || suggestion.length == 0) {
       setSuggestion([]);
-      setdropDownActive(true);
+      setHide(true);
     }
   };
+  console.log(query);
   const KeyBoardNavigation = (e) => {
     if (e.key === "ArrowDown") {
-      if (!dropDownActive) {
+      if (!Hide) {
         setCursor((c) => (c < suggestion.length - 1 ? c + 1 : c));
       }
     }
@@ -69,9 +77,23 @@ function HomePage() {
       setCursor((c) => (c >= 0 ? c - 1 : 0));
     }
     if (e.key === "Escape") {
-      setdropDownActive(true);
+      setHide(true);
+    }
+    if (e.key === "Enter" && cursor >= 0) {
+      let arr = suggestion[cursor].url.split("/");
+      let id = arr[arr.length - 2];
+      history.push({
+        pathname: `/person/${id}`,
+      });
     }
   };
+  const handleClearInput = () => {
+    setQuery("");
+    setSuggestion([]);
+    setLoading(false);
+    setHide(true);
+  };
+  console.log(suggestion);
   return (
     <div>
       <div className="logo">
@@ -85,21 +107,29 @@ function HomePage() {
           onChange={handleChange}
           onKeyDown={(e) => KeyBoardNavigation(e)}
         />
+        {query.length > 0 ? (
+          <div className="clear">
+            <div onClick={handleClearInput}>X</div>
+          </div>
+        ) : (
+          ""
+        )}
         {loading ? (
-          <div className="loader">jj</div>
+          <div className="loader1"></div>
         ) : (
           <MdSearch className="search-icon" />
         )}
       </div>
 
-      {dropDownActive ? null : (
+      {Hide ? null : (
         <div className="div-dropdown">
           {suggestion?.map((char, index) => (
-            <Person
+            <PersonSuggest
               name={char.name}
               gender={char.gender}
               year={char.birth_year}
               key={index}
+              url={char.url}
               onSelected={() => {
                 setQuery(char.name);
               }}

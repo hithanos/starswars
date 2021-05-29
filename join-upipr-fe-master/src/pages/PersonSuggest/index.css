@@ -1,0 +1,19 @@
+.outer {
+  font-size: 12px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  align-items: center;
+  padding: 0px 10px;
+}
+.outer:hover {
+  cursor: pointer;
+  border: 1px solid #5a5d5e;
+}
+.Left > p {
+  margin-top: -10px;
+}
+.activeBackground {
+  background-color: #5a5d5e;
+}

@@ -46,13 +46,21 @@
   background-color: #2d2f30;
   margin-top: -3.5px;
 }
-.loader {
-  border: 16px solid #f3f3f3; /* Light grey */
-  border-top: 16px solid #3498db; /* Blue */
+.clear {
+  font-size: 30px;
+  margin-right: 8px;
+}
+.clear:hover {
+  cursor: pointer;
+}
+.loader1 {
+  border: 3px solid #f3f3f3; /* Light grey */
+  border-top: 3px solid #ecce0b; /* Blue */
   border-radius: 50%;
-  width: 120px;
-  height: 120px;
+  width: 30px;
+  height: 30px;
   animation: spin 2s linear infinite;
+  margin-right: 10px;
 }
 
 @keyframes spin {
