@@ -1,13 +1,19 @@
 # Urban Piper Star Wars Search Bar
-### Search bar for urban piper stars wars
+  This is Star Wars Character Search bar given as an assignment from Urban Piper. Where users can search for their favourite characters of Star Wars.
+### Deployement and screenshot
 
-* <a href="https://himanshuurbanpiperstarwars.netlify.app/">Live Demo</a>
+* Click 👉 <a href="https://himanshuurbanpiperstarwars.netlify.app/">Live Demo</a>
+ 
+ ![Screenshot 2021-05-30 at 16 49 31](https://user-images.githubusercontent.com/47266526/120102102-1a2ed080-c167-11eb-9035-efada1c5a080.png)
 
-## Build a Search Bar to find Stars Wars People 
-* Made the perfect search bar with keyboard functionality.
+
+## Features in Search Bar 
+* User can search for characters in the search bar
+* User can toggle search bar with keyboard functionality to switch and select suggestions.
 * Used debouncing to limit the number  of api calls.
-* Implemented a live search feature .
-* Implemeted arrow key up and down to switch and select suggestions
+* Implemented a live search feature.
+* User can click on any search option and go to see the full details.
+
 
 ### Installation
 
@@ -16,20 +22,19 @@
 ``` 
 yarn install
 ```
-
-* Then one can directly go to the search page after starting the app and type the any character name
-
 ```
 yarn run start
 ```
+* Then one can directly go to the search page after starting the app and type the any character name
 
-* Click or press enter on any result to see the particular page of particular character
+* Click or press enter on any result to see the particular page of particular character.
 
 
 ### TechStack Used:
 
 * ReactJS
 * Javascript
+* Axios
 * HTML5
 * CSS 
 
