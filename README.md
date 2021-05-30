@@ -1,10 +1,10 @@
-# Urban_piper_search_bar
+# Urban Piper Star Wars Search Bar
 ### Search bar for urban piper stars wars
 
 * <a href="https://himanshuurbanpiperstarwars.netlify.app/">Live Demo</a>
 
 ## Build a Search Bar to find Stars Wars People 
-* Made the perfect search bar.
+* Made the perfect search bar with keyboard functionality.
 * Used debouncing to limit the number  of api calls.
 * Implemented a live search feature .
 * Implemeted arrow key up and down to switch and select suggestions
@@ -26,7 +26,7 @@ yarn run start
 * Click or press enter on any result to see the particular page of particular character
 
 
-### TechStack
+### TechStack Used:
 
 * ReactJS
 * Javascript
